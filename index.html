@@ -79,7 +79,7 @@
 <body>
     <!-- Add this navbar at the very top, inside <body> but before .container -->
     <nav class="navbar navbar-expand-lg" style="background-color: #000; font-weight: 900; font-size: 1.2rem;">
-        <a class="navbar-brand d-flex align-items-center" href="#" style="font-size: 2rem; letter-spacing: 2px; margin-left: 180px;">
+        <a class="navbar-brand d-flex align-items-center" href="#" id="homeLogo" style="font-size: 2rem; letter-spacing: 2px; margin-left: 180px;">
             <img src="img/transparent-Photoroom.png" alt="Noxx Logo" style="height: 48px; width: auto; margin-right: 12px;">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
@@ -88,15 +88,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto" style="margin-right: 1000px;">
-                <!-- Example menu items, edit as needed -->
-                
                 <li class="nav-item">
                     <a class="nav-link" href="#singlesHeader" style="font-weight: 850; color: #fff; width: 155px;">Noxx Singles</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#bundlesHeader" style="font-weight: 850; color: #fff; width: 165px;">Noxx Bundles</a>
                 </li>
-                
             </ul>
         </div>
     </nav>
@@ -107,7 +104,7 @@
             </form>
         </div>
         <div id="mainContent">
-            <h2 class="mt-4 mb-4 text-left" id="singlesHeader" >Noxx Singles</h2>
+            <h2 class="mt-4 mb-4 text-left" id="singlesHeader">Noxx Singles</h2>
             <!-- Noxx Singles -->
             <div class="row text-center" id="singlesRow">
                 <div class="col-md-4 mb-4">
@@ -209,6 +206,12 @@
         <div class="payment border-top mt-4 pt-3 font-italic font-weight-bold">
             Payment Methods<br>In-Person Pickup Only • Cash Only
         </div>
+        <div style="width: 100%; margin-top: 12px;">
+            <span style="float: left; color: #888; font-size: 0.9rem;">
+                © 2025, Noxx • 
+                <a href="#" id="refundPolicyBtn" style="color: #888; text-decoration: underline; font-size: 0.9rem; border: none; background: none; padding: 0; cursor: pointer;">Refund policy</a>
+            </span>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -235,5 +238,67 @@
             box-shadow: 1px 1px 6px rgba(0,0,0,0.08);
         }
     </style>
+    
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const refundBtn = document.getElementById("refundPolicyBtn");
+        const mainContent = document.getElementById("mainContent");
+        const paymentDiv = document.querySelector('.payment');
+        const contactDiv = document.querySelector('.contact');
+
+        refundBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+
+            // Hide all items except navbar, search, contact, payment, and footer
+            if (mainContent) mainContent.style.display = "none";
+            if (paymentDiv) paymentDiv.style.display = "";
+            if (contactDiv) contactDiv.style.display = "";
+
+            // Remove any previous refund message
+            let prevMsg = document.getElementById("refundPolicyMsg");
+            if (prevMsg) prevMsg.remove();
+
+            // Insert refund policy message above contactDiv
+            const msg = document.createElement("div");
+            msg.id = "refundPolicyMsg";
+            msg.innerHTML = `
+                <h2 style="font-size:2rem; color:#111; font-weight:800; margin-bottom:18px; background:none; border:none;">Refund policy</h2>
+                <div class="alert alert-info mt-2 text-center" style="background:none; color:#222; border:none; font-size:1.1rem; font-weight:500;">
+                    All sales are final. If you experience any issues with your order, please contact us directly through Instagram at <b>@noxx.lab</b>
+                </div>
+            `;
+            contactDiv.parentNode.insertBefore(msg, contactDiv);
+        });
+    });
+    </script>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const mainContent = document.getElementById("mainContent");
+
+    // Handles logo click
+    const homeLogo = document.getElementById("homeLogo");
+    if (homeLogo) {
+        homeLogo.addEventListener("click", function(e) {
+            e.preventDefault();
+            if (mainContent) mainContent.style.display = "";
+            let msg = document.getElementById("refundPolicyMsg");
+            if (msg) msg.remove();
+        });
+    }
+
+    // Handles menu clicks for Noxx Singles and Noxx Bundles
+    const singlesMenu = document.querySelector('a.nav-link[href="#singlesHeader"]');
+    const bundlesMenu = document.querySelector('a.nav-link[href="#bundlesHeader"]');
+    [singlesMenu, bundlesMenu].forEach(function(link) {
+        if (link) {
+            link.addEventListener("click", function() {
+                if (mainContent) mainContent.style.display = "";
+                let msg = document.getElementById("refundPolicyMsg");
+                if (msg) msg.remove();
+            });
+        }
+    });
+});
+</script>
 </body>
 </html>
