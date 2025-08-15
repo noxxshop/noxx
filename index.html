@@ -23,6 +23,10 @@
                 let singlesFound = false;
                 let bundlesFound = false;
 
+                // Remove previous no-results message if any
+                let noResults = document.getElementById("noResultsMsg");
+                if (noResults) noResults.remove();
+
                 // Hide all cards initially
                 cards.forEach(card => card.parentElement.style.display = "none");
 
@@ -47,12 +51,18 @@
                 if (!singlesFound) singles.style.display = "none";
                 if (!bundlesFound) bundles.style.display = "none";
 
-                // If nothing found, hide both headers and rows
+                // If nothing found, hide both headers and rows and show no results message
                 if (!found) {
                     singlesHeader.style.display = "none";
                     bundlesHeader.style.display = "none";
                     singles.style.display = "none";
                     bundles.style.display = "none";
+
+                    const msg = document.createElement("div");
+                    msg.id = "noResultsMsg";
+                    msg.className = "alert alert-warning mt-4 text-center";
+                    msg.innerHTML = `No results found for "<strong>${input.value}</strong>". Check the spelling or use a different word or phrase.`;
+                    allContent.appendChild(msg);
                 }
             }
 
@@ -96,11 +106,19 @@
             </form>
         </div>
         <div id="mainContent">
-            <h2 class="mt-4 mb-4 text-left" id="singlesHeader">Noxx Singles</h2>
+            <h2 class="mt-4 mb-4 text-left" id="singlesHeader" >Noxx Singles</h2>
+            <!-- Noxx Singles -->
             <div class="row text-center" id="singlesRow">
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        <img src="img/v1.png" class="card-img-top" alt="Noxx V1 Sticker">
+                        <div class="position-relative">
+                            <img src="img/v1.png" class="card-img-top" alt="Noxx V1 Sticker">
+
+                            <!-- SOLD OUT TEXT BOX -->
+                            <!-- <span class="sold-out-badge">Sold Out</span> -->
+                            <!-- SOLD OUT TEXT BOX -->
+
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title">Noxx V1 Stickers (1 pc)</h5>
                             <p class="card-text">Item Version: V1</p>
@@ -110,7 +128,18 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        <img src="img/v2.png" class="card-img-top" alt="Noxx V2 Sticker">
+                        <div class="position-relative">
+                            <img src="img/v2.png" class="card-img-top" alt="Noxx V2 Sticker">
+                            
+                            
+                            
+                            <!-- SOLD OUT TEXT BOX -->
+                            <span class="sold-out-badge">Sold Out</span>
+                            <!-- SOLD OUT TEXT BOX -->
+                        
+                        
+                        
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title">Noxx V2 Stickers (1 pc)</h5>
                             <p class="card-text">Item Version: V2</p>
@@ -120,10 +149,24 @@
                 </div>
             </div>
             <h2 class="mt-4 mb-4 text-left" id="bundlesHeader">Noxx Bundles</h2>
+            <!-- Noxx Bundles -->
             <div class="row text-center" id="bundlesRow">
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        <img src="img/360_F_619483347_CAwrNjjQyiAdTyfoVlIJS7NsTKzyRfes.jpg" class="card-img-top" alt="Bundle Coming Soon">
+                        <div class="position-relative">
+                            <img src="img/v1x2+v2x1.png" class="card-img-top" alt="Bundle Coming Soon">
+                            
+                            
+                            
+                            
+                            <!-- SOLD OUT TEXT BOX -->
+                            <span class="sold-out-badge">Sold Out</span>
+                            <!-- SOLD OUT TEXT BOX -->
+
+
+
+
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title">V1x2 + V2x1(3 pc)</h5>
                             <p class="card-text">Item Version: BV1</p>
@@ -133,7 +176,20 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        <img src="img/360_F_619483347_CAwrNjjQyiAdTyfoVlIJS7NsTKzyRfes.jpg" class="card-img-top" alt="Bundle Coming Soon">
+                        <div class="position-relative">
+                            <img src="img/v1x2+v2x2.png" class="card-img-top" alt="Bundle Coming Soon">
+                            
+                            
+                            
+                            
+                            <!-- SOLD OUT TEXT BOX -->
+                            <span class="sold-out-badge">Sold Out</span>
+                            <!-- SOLD OUT TEXT BOX -->
+
+
+
+
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title">V1x2 + V2x2(4 pc)</h5>
                             <p class="card-text">Item Version: BV2</p>
@@ -157,6 +213,20 @@
             .navbar-brand {
                 margin-left: 10px !important;
             }
+        }
+        .sold-out-badge {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background: #dc3545;
+            color: #fff;
+            font-weight: bold;
+            padding: 4px 14px 4px 10px;
+            border-top-right-radius: 8px;
+            font-size: 1rem;
+            z-index: 2;
+            opacity: 0.95;
+            box-shadow: 1px 1px 6px rgba(0,0,0,0.08);
         }
     </style>
 </body>
