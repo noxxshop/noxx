@@ -196,6 +196,25 @@
                     </div>
                 </div>
             </div>
+            <h2 class="mt-4 mb-4 text-left" id="exclusiveBundlesHeader">Mini Surron Model</h2>
+            <div class="row text-center" id="exclusiveBundlesRow">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="position-relative">
+                            <img id="miniSurronSlideshow" src="img/1.png" class="card-img-top" alt="Mini Surron Model">
+                            
+                            <span class="sold-out-badge">Only 1 available</span>
+                            
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Mini Surron Model*</h5>
+                            <p class="card-text">Item Verison: MSM1</p>
+                            <p class="card-text">Details: Spinning wheels, full suspension, brake lines, comes with surron battery model, comes with dirtbike helmet, slick tires. 3D Printed.</p>
+                            <p class="price"><span class="old-price">$150 USD</span> $140 USD</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="contact mt-4 text-center">
             For orders, DM us at @noxx.lab on Instagram, or click the instagram button below.<br>
@@ -298,6 +317,31 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
     });
+});
+</script>
+
+<script>
+// Slideshow for Mini Surron Model
+document.addEventListener("DOMContentLoaded", function() {
+    const imgList = [
+        "img/1.png",
+        "img/2.png",
+        "img/3.png",
+        "img/4.png",
+        "img/5.png",
+        "img/6.png",
+        "img/7.png",
+        "img/8.png",
+        "img/9.png"
+    ];
+    let idx = 0;
+    const slideshowImg = document.getElementById("miniSurronSlideshow");
+    if (slideshowImg) {
+        setInterval(function() {
+            idx = (idx + 1) % imgList.length;
+            slideshowImg.src = imgList[idx];
+        }, 2500);
+    }
 });
 </script>
 </body>
