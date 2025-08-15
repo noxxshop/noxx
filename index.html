@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noxx</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById("searchForm");
+            const input = document.getElementById("searchInput");
+            const allContent = document.getElementById("mainContent");
+            const singles = document.getElementById("singlesRow");
+            const bundles = document.getElementById("bundlesRow");
+            const singlesHeader = document.getElementById("singlesHeader");
+            const bundlesHeader = document.getElementById("bundlesHeader");
+
+            function doSearch() {
+                const query = input.value.trim().toLowerCase();
+                const cards = allContent.querySelectorAll(".card");
+                let found = false;
+                let singlesFound = false;
+                let bundlesFound = false;
+
+                // Hide all cards initially
+                cards.forEach(card => card.parentElement.style.display = "none");
+
+                // Show cards that match and track which section they are in
+                cards.forEach(card => {
+                    const text = card.innerText.toLowerCase();
+                    if (text.includes(query)) {
+                        card.parentElement.style.display = "";
+                        found = true;
+                        if (card.closest("#singlesRow")) singlesFound = true;
+                        if (card.closest("#bundlesRow")) bundlesFound = true;
+                    }
+                });
+
+                // Show/hide headers and rows based on search results
+                singlesHeader.style.display = singlesFound ? "" : "none";
+                bundlesHeader.style.display = bundlesFound ? "" : "none";
+                singles.style.display = singlesFound ? "" : "none";
+                bundles.style.display = bundlesFound ? "" : "none";
+
+                // Hide rows if no cards in them match
+                if (!singlesFound) singles.style.display = "none";
+                if (!bundlesFound) bundles.style.display = "none";
+
+                // If nothing found, hide both headers and rows
+                if (!found) {
+                    singlesHeader.style.display = "none";
+                    bundlesHeader.style.display = "none";
+                    singles.style.display = "none";
+                    bundles.style.display = "none";
+                }
+            }
+
+            input.addEventListener("input", doSearch);
+
+            // Optional: prevent form submit from reloading page
+            form.addEventListener("submit", function(e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- Add this navbar at the very top, inside <body> but before .container -->
+    <nav class="navbar navbar-expand-lg" style="background-color: #000; font-weight: 900; font-size: 1.2rem;">
+        <a class="navbar-brand d-flex align-items-center" href="#" style="font-size: 2rem; letter-spacing: 2px; margin-left: 180px;">
+            <img src="img/transparent-Photoroom.png" alt="Noxx Logo" style="height: 48px; width: auto; margin-right: 12px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto" style="margin-right: 1000px;">
+                <!-- Example menu items, edit as needed -->
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#singlesHeader" style="font-weight: 850; color: #fff; width: 155px;">Noxx Singles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#bundlesHeader" style="font-weight: 850; color: #fff; width: 165px;">Noxx Bundles</a>
+                </li>
+                
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center" style="margin-top: 8px;">
+            <form class="form-inline ml-auto" id="searchForm" style="position: absolute; right: 15px; top: 18px;">
+                <input class="form-control mr-2" id="searchInput" type="search" placeholder="Search for Noxx" aria-label="Search">
+            </form>
+        </div>
+        <div id="mainContent">
+            <h2 class="mt-4 mb-4 text-left" id="singlesHeader">Noxx Singles</h2>
+            <div class="row text-center" id="singlesRow">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="img/v1.png" class="card-img-top" alt="Noxx V1 Sticker">
+                        <div class="card-body">
+                            <h5 class="card-title">Noxx V1 Stickers (1 pc)</h5>
+                            <p class="card-text">Item Version: V1</p>
+                            <p class="price"><span class="old-price">$4 USD</span> $2 USD</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="img/v2.png" class="card-img-top" alt="Noxx V2 Sticker">
+                        <div class="card-body">
+                            <h5 class="card-title">Noxx V2 Stickers (1 pc)</h5>
+                            <p class="card-text">Item Version: V2</p>
+                            <p class="price"><span class="old-price">$5 USD</span> $3 USD</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="mt-4 mb-4 text-left" id="bundlesHeader">Noxx Bundles</h2>
+            <div class="row text-center" id="bundlesRow">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="img/360_F_619483347_CAwrNjjQyiAdTyfoVlIJS7NsTKzyRfes.jpg" class="card-img-top" alt="Bundle Coming Soon">
+                        <div class="card-body">
+                            <h5 class="card-title">V1x2 + V2x1(3 pc)</h5>
+                            <p class="card-text">Item Version: BV1</p>
+                            <p class="price"><span class="old-price">$10 USD</span> $8 USD</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="img/360_F_619483347_CAwrNjjQyiAdTyfoVlIJS7NsTKzyRfes.jpg" class="card-img-top" alt="Bundle Coming Soon">
+                        <div class="card-body">
+                            <h5 class="card-title">V1x2 + V2x2(4 pc)</h5>
+                            <p class="card-text">Item Version: BV2</p>
+                            <p class="price"><span class="old-price">$15 USD</span> $10 USD</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contact mt-4">For orders, DM us at @noxx.lab on Instagram</div>
+        <div class="payment border-top mt-4 pt-3 font-italic font-weight-bold">
+            Payment Methods<br>In-Person Pickup Only • Cash Only
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
